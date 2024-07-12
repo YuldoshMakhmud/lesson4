@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lesson4/resource/resource.dart';
+import 'package:lesson4/screens/counter_info_page.dart';
 import 'package:lesson4/widgets/circle_item.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
@@ -18,29 +20,49 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration: const BoxDecoration(
+          decoration:  BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/oy.jpg"), fit: BoxFit.cover),
+                image: AssetImage(
+                    ImageAssets.backgroundImage), fit: BoxFit.cover),
           ),
           child: Column(
             children: [
               Expanded(
                 flex: 1,
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: ZoomTapAnimation(
-                    onTap: () {
-                      counter = 0;
-                      setState(() {});
-                    },
-                    child: CircleAvatar(
-                      radius: 52,
-                      backgroundColor: Colors.blue,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
-                        child: Image.asset("assets/images/yer.png"),
+                child: Padding(
+                  padding: EdgeInsets.all(4),
+                  child: Row(
+                    
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [ZoomTapAnimation(
+                      onTap: () {
+                        counter = 0;
+                        setState(() {});
+                      },
+                          child: CircleAvatar(
+                        radius: 52,
+                        backgroundColor: Colors.blue,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child: Image.asset("assets/images/yer.png"),
+                        ),
                       ),
-                    ),
+                    ), ZoomTapAnimation(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        CounterInfoPage(counter: counter)));
+                            setState(() {});
+                          },
+                          child: CircleItem(
+                            color: Colors.grey.withOpacity(0.6),
+                            radius: 50,
+                            textSize: 20,
+                            text: 'blackHole',
+                          )),
+                    ],
                   ),
                 ),
               ),
